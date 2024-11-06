@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'pins',
+    title: 'Pins',
     loadComponent: () =>
       import('./features/pins/pages/pins-list/pins-list.component').then(
         (m) => m.PinsListComponent
