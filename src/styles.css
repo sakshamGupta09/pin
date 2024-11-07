@@ -1,3 +1,6 @@
+@import "./app/styles/flex.css";
+@import "./app/styles/spacing.css";
+
 :root {
   --body-bg: #dfdbe5;
   --surface-bg: #fff;
