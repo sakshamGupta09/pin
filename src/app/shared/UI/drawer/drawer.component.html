@@ -1,6 +1,7 @@
 <!-- Backdrop -->
-@if (isVisible()) {}
+@if (isVisible()) {
 <div class="drawer-backdrop"></div>
+}
 
 <!-- Drawer content -->
 <div class="drawer-content" [@slideInOut]="isVisible() ? 'open' : 'closed'">

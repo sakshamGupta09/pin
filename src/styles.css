@@ -1,3 +1,12 @@
 :root {
-  --drawerWidth: 20rem;
+  --body-bg: #dfdbe5;
+  --surface-bg: #fff;
+  --text-color: #282c3f;
+  --drawerWidth: 30rem;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background-color: var(--body-bg);
+  color: var(--text-color);
 }

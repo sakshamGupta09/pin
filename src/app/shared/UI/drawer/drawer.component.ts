@@ -23,5 +23,5 @@ import {
   ],
 })
 export class DrawerComponent {
-  protected isVisible = input.required<boolean>();
+  public isVisible = input.required<boolean>();
 }

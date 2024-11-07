@@ -1,6 +1,6 @@
 export interface ICustomer {
-  title: string;
+  name: string;
   email: string;
-  regionId: number;
-  countryId: number;
+  region: string;
+  country: string;
 }
