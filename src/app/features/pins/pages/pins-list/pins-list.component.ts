@@ -2,14 +2,17 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
+  signal,
+  viewChild,
   ViewContainerRef,
 } from '@angular/core';
 import { GlobalDataService } from '../../../../core/services/global-data.service';
+import { DrawerComponent } from '../../../../shared/UI/drawer/drawer.component';
 
 @Component({
   selector: 'app-pins-list',
   standalone: true,
-  imports: [],
+  imports: [DrawerComponent],
   templateUrl: './pins-list.component.html',
   styleUrl: './pins-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,33 +20,41 @@ import { GlobalDataService } from '../../../../core/services/global-data.service
 export class PinsListComponent {
   private dataService = inject(GlobalDataService);
 
-  private viewContainer = inject(ViewContainerRef);
+  private drawerContent = viewChild('drawerContent', {
+    read: ViewContainerRef,
+  });
 
   protected pins = this.dataService.getPins();
 
-  protected async addPinHandler() {
-    this.viewContainer.clear();
+  protected showDrawer = signal(false);
 
+  protected async addPinHandler() {
     const { AddPinComponent } = await import(
       '../../components/add-pin/add-pin.component'
     );
-    this.viewContainer.createComponent(AddPinComponent);
+    this.drawerContent()?.createComponent(AddPinComponent);
   }
 
   protected async addCustomerHandler() {
-    this.viewContainer.clear();
+    this.setDrawerVisibility(true);
 
     const { AddCustomerComponent } = await import(
       '../../../customers/components/add-customer/add-customer.component'
     );
-    const component = this.viewContainer.createComponent(AddCustomerComponent);
-
-    component.instance.cancelClick.subscribe(() => {
-      this.closeDrawer();
-    });
+    const component =
+      this.drawerContent()?.createComponent(AddCustomerComponent);
   }
 
-  protected closeDrawer(): void {
-    this.viewContainer.clear();
+  protected destroyComponent(): void {
+    this.drawerContent()?.clear();
+  }
+
+  public setDrawerVisibility(visibility: boolean): void {
+    this.showDrawer.set(visibility);
+  }
+
+  public closeDrawer(): void {
+    this.setDrawerVisibility(false);
+    this.destroyComponent();
   }
 }

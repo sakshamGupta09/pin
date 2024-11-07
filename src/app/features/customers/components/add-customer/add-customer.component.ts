@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  output,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   AbstractControl,
   NonNullableFormBuilder,
@@ -13,12 +7,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { GlobalDataService } from '../../../../core/services/global-data.service';
-import { DrawerComponent } from '../../../../shared/UI/drawer/drawer.component';
+import { DrawerContentComponent } from '../../../../shared/UI/drawer-content/drawer-content.component';
 
 @Component({
   selector: 'app-add-customer',
   standalone: true,
-  imports: [DrawerComponent, ReactiveFormsModule],
+  imports: [DrawerContentComponent, ReactiveFormsModule],
   templateUrl: './add-customer.component.html',
   styleUrl: './add-customer.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,15 +35,6 @@ export class AddCustomerComponent {
     region: ['', [Validators.required]],
     country: ['', [Validators.required]],
   });
-
-  protected showDrawer = signal(true);
-
-  public cancelClick = output();
-
-  protected closeClickHandler(): void {
-    this.showDrawer.set(false);
-    this.cancelClick.emit();
-  }
 
   private emailExistsValidator(
     control: AbstractControl

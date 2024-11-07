@@ -31,3 +31,8 @@
     </tbody>
   </table>
 </div>
+
+<!-- Drawer -->
+<app-drawer [isVisible]="showDrawer()" (onClose)="setDrawerVisibility(false)">
+  <ng-container #drawerContent></ng-container>
+</app-drawer>
