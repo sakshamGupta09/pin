@@ -3,6 +3,7 @@ import {
   Component,
   inject,
   output,
+  signal,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -41,7 +42,14 @@ export class AddCustomerComponent {
     country: ['', [Validators.required]],
   });
 
+  protected showDrawer = signal(true);
+
   public cancelClick = output();
+
+  protected closeClickHandler(): void {
+    this.showDrawer.set(false);
+    this.cancelClick.emit();
+  }
 
   private emailExistsValidator(
     control: AbstractControl
