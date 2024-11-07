@@ -1,0 +1,29 @@
+.form {
+  .form__label {
+    display: inline-block;
+    color: #0009;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .form__label.required::after {
+    color: #e32;
+    content: " *";
+    display: inline;
+  }
+
+  .form__input {
+    padding: 0.75rem 1rem;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: inherit;
+  }
+
+  .form__input.ng-invalid:is(.ng-touched, .ng-dirty) {
+    border-color: #e32;
+  }
+}

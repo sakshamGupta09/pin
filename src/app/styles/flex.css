@@ -9,3 +9,7 @@
 .gap-2 {
   gap: 1rem 1rem;
 }
+
+.w-100 {
+  width: 100%;
+}

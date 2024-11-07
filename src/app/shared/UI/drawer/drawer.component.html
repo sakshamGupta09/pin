@@ -5,5 +5,13 @@
 
 <!-- Drawer content -->
 <div class="drawer-content" [@slideInOut]="isVisible() ? 'open' : 'closed'">
-  <ng-content></ng-content>
+  <div class="drawer__header">
+    <h2 class="drawer__title">
+      <ng-content select="title"></ng-content>
+    </h2>
+  </div>
+
+  <div class="drawer__body">
+    <ng-content select="body"></ng-content>
+  </div>
 </div>

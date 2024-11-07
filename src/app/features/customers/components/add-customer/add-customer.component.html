@@ -1,3 +1,14 @@
 <app-drawer [isVisible]="true" (onClose)="cancelClick.emit()">
-  <p>Hello</p>
+  <ng-container ngProjectAs="title">Add customer</ng-container>
+
+  <ng-container ngProjectAs="body">
+    <form [formGroup]="form" novalidate class="form">
+      <!-- Name -->
+      <div>
+        <label class="form__label required" for="name">Name</label>
+        <input type="text" placeholder="Name" id="name" formControlName="name" class="w-100 form__input">
+      </div>
+    </form>
+  </ng-container>
+
 </app-drawer>

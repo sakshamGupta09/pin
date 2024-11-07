@@ -21,6 +21,22 @@
   z-index: 20;
 }
 
+.drawer__header {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.drawer__title {
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  color: #183247;
+}
+
+.drawer__body {
+  padding: 1.5rem 0.75rem;
+}
+
 @media only screen and (max-width: 20rem) {
   .drawer-content {
     width: 100%;
