@@ -36,6 +36,14 @@ export class PinsListComponent {
     const { AddCustomerComponent } = await import(
       '../../../customers/components/add-customer/add-customer.component'
     );
-    this.viewContainer.createComponent(AddCustomerComponent);
+    const component = this.viewContainer.createComponent(AddCustomerComponent);
+
+    component.instance.cancelClick.subscribe(() => {
+      this.closeDrawer();
+    });
+  }
+
+  protected closeDrawer(): void {
+    this.viewContainer.clear();
   }
 }

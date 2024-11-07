@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  output,
+} from '@angular/core';
 import {
   AbstractControl,
   NonNullableFormBuilder,
@@ -35,6 +40,8 @@ export class AddCustomerComponent {
     region: ['', [Validators.required]],
     country: ['', [Validators.required]],
   });
+
+  public cancelClick = output();
 
   private emailExistsValidator(
     control: AbstractControl

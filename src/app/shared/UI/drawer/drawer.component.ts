@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
 import {
   trigger,
   state,
@@ -24,4 +29,10 @@ import {
 })
 export class DrawerComponent {
   public isVisible = input.required<boolean>();
+
+  public onClose = output();
+
+  protected closeClickHandler(): void {
+    this.onClose.emit();
+  }
 }
