@@ -16,7 +16,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('slideInOut', [
-      state('open', style({ transform: 'translateX(0%)' })),
+      state('open', style({ transform: 'translateX(0)' })),
       state('closed', style({ transform: 'translateX(100%)' })),
       transition('open <=> closed', [animate('0.3s ease')]),
     ]),

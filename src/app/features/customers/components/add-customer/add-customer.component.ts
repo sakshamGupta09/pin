@@ -7,11 +7,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { GlobalDataService } from '../../../../core/services/global-data.service';
+import { DrawerComponent } from '../../../../shared/UI/drawer/drawer.component';
 
 @Component({
   selector: 'app-add-customer',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [DrawerComponent, ReactiveFormsModule],
   templateUrl: './add-customer.component.html',
   styleUrl: './add-customer.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
