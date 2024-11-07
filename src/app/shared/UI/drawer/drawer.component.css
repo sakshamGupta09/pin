@@ -20,3 +20,9 @@
   transition: transform 0.3s ease;
   z-index: 20;
 }
+
+@media only screen and (max-width: 20rem) {
+  .drawer-content {
+    width: 100%;
+  }
+}
