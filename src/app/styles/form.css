@@ -26,4 +26,12 @@
   .form__input.ng-invalid:is(.ng-touched, .ng-dirty) {
     border-color: #e32;
   }
+
+  .form__error {
+    font-size: 1rem;
+    color: #e32;
+    font-weight: 500;
+    margin-top: 0.25rem;
+    letter-spacing: 0.8px;
+  }
 }

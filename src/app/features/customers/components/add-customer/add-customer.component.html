@@ -1,4 +1,4 @@
-<app-drawer-content>
+<app-drawer-content (onClose)="onDrawerClose.emit()">
   <ng-container ngProjectAs="title">Add customer</ng-container>
 
   <ng-container ngProjectAs="body">
@@ -7,13 +7,24 @@
       <div>
         <label class="form__label required" for="name">Name</label>
         <input type="text" placeholder="Name" id="name" formControlName="name" class="w-100 form__input">
+
+        <!-- Errors -->
+        @if (name.invalid && (name.touched || name.dirty)) {
+        <p class="form__error">
+          @if (name.hasError('required')) {
+          This field is required
+          }
+        </p>
+        }
       </div>
     </form>
   </ng-container>
 
   <ng-container ngProjectAs="footer">
-    <button class="btn">Cancel</button>
-    <button class="btn">Submit</button>
+    <div class="flex justify-between">
+      <button class="btn" (click)="onDrawerClose.emit()">Cancel</button>
+      <button class="btn" (click)="submitClickHandler()">Submit</button>
+    </div>
   </ng-container>
 
 </app-drawer-content>

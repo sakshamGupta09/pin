@@ -13,3 +13,11 @@ body {
   background-color: var(--body-bg);
   color: var(--text-color);
 }
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

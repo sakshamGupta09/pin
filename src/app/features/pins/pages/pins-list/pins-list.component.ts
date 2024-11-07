@@ -35,7 +35,7 @@ export class PinsListComponent {
     this.drawerContent()?.createComponent(AddPinComponent);
   }
 
-  protected async addCustomerHandler() {
+  protected async addCustomerClickHandler() {
     this.setDrawerVisibility(true);
 
     const { AddCustomerComponent } = await import(
@@ -43,6 +43,10 @@ export class PinsListComponent {
     );
     const component =
       this.drawerContent()?.createComponent(AddCustomerComponent);
+
+    component?.instance.onDrawerClose.subscribe(() => {
+      this.closeDrawer();
+    });
   }
 
   protected destroyComponent(): void {

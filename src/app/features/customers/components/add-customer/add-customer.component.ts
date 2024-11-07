@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  output,
+} from '@angular/core';
 import {
   AbstractControl,
   NonNullableFormBuilder,
@@ -36,6 +41,8 @@ export class AddCustomerComponent {
     country: ['', [Validators.required]],
   });
 
+  public onDrawerClose = output();
+
   private emailExistsValidator(
     control: AbstractControl
   ): ValidationErrors | null {
@@ -47,5 +54,15 @@ export class AddCustomerComponent {
       }
     }
     return null;
+  }
+
+  protected submitClickHandler(): void {
+    if (this.form.invalid) {
+      return this.form.markAllAsTouched();
+    }
+  }
+
+  protected get name() {
+    return this.form.get('name') as AbstractControl;
   }
 }
