@@ -6,7 +6,7 @@
       <!-- Name -->
       <div>
         <label class="form__label required" for="name">Name</label>
-        <input type="text" placeholder="Name" id="name" formControlName="name" class="w-100 form__input">
+        <input type="text" placeholder="Name" id="name" formControlName="name" class="w-100 form__input" autofocus>
 
         <!-- Errors -->
         @if (name.invalid && (name.touched || name.dirty)) {
@@ -19,7 +19,6 @@
       </div>
 
       <br>
-
       <!-- Email -->
       <div>
         <label class="form__label required" for="email">Email</label>
@@ -36,6 +35,43 @@
           }
           @if (email.hasError('emailExists')) {
           Email already exists
+          }
+        </p>
+        }
+      </div>
+
+      <br>
+      <!-- Region -->
+      <div>
+        <label class="form__label required" for="region">Region</label>
+        <ng-select [items]="regions()" placeholder="Select a region" formControlName="region"
+          (change)="regionChangeHandler()">
+        </ng-select>
+
+
+        <!-- Errors -->
+        @if (region.invalid && (region.touched || region.dirty)) {
+        <p class="form__error">
+          @if (region.hasError('required')) {
+          This field is required
+          }
+        </p>
+        }
+      </div>
+
+      <br>
+      <!-- Country -->
+      <div>
+        <label class="form__label required" for="country">Country</label>
+        <ng-select [items]="countries()[region.value] || []" placeholder="Select a country" formControlName="country">
+        </ng-select>
+
+
+        <!-- Errors -->
+        @if (country.invalid && (country.touched || country.dirty)) {
+        <p class="form__error">
+          @if (country.hasError('required')) {
+          This field is required
           }
         </p>
         }

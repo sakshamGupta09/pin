@@ -18,11 +18,12 @@ import { DrawerContentComponent } from '../../../../shared/UI/drawer-content/dra
 import { ICustomer } from '../../../../core/models/customer';
 import { LocationService } from '../../../../shared/services/location.service';
 import { RegionWiseCountries } from '../../../../core/models/locations';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-add-customer',
   standalone: true,
-  imports: [DrawerContentComponent, ReactiveFormsModule],
+  imports: [DrawerContentComponent, ReactiveFormsModule, NgSelectComponent],
   templateUrl: './add-customer.component.html',
   styleUrl: './add-customer.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,8 +45,8 @@ export class AddCustomerComponent implements OnInit {
         this.emailExistsValidator.bind(this),
       ],
     ],
-    region: ['ABC', [Validators.required]],
-    country: ['DEF', [Validators.required]],
+    region: [null, [Validators.required]],
+    country: [null, [Validators.required]],
   });
 
   protected regions = signal<string[]>([]);
@@ -107,6 +108,10 @@ export class AddCustomerComponent implements OnInit {
       region: this.region.value,
       country: this.country.value,
     };
+  }
+
+  protected regionChangeHandler(): void {
+    this.country.setValue(null);
   }
 
   protected get name() {

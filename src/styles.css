@@ -1,5 +1,6 @@
 @import "./app/styles/flex.css";
 @import "./app/styles/spacing.css";
+@import "../node_modules/@ng-select/ng-select/themes/default.theme.css";
 
 :root {
   --body-bg: #dfdbe5;
@@ -20,4 +21,12 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+  height: 2.75rem;
+}
+
+ng-select.ng-invalid:is(.ng-touched, .ng-dirty) .ng-select-container {
+  border-color: #e32;
 }
