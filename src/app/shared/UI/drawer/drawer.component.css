@@ -21,7 +21,7 @@
   z-index: 10;
 }
 
-@media only screen and (max-width: 20rem) {
+@media only screen and (max-width: 30rem) {
   .drawer {
     width: 100%;
   }
