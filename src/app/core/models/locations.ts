@@ -1,5 +1,5 @@
 export type RegionWiseCountries = Record<string, string[]>;
 
-export interface ICountriesResponse {
+export interface ILocationsResponse {
   data: Record<string, { country: string; region: string }>;
 }

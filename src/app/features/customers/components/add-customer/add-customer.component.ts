@@ -2,7 +2,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
+  OnInit,
   output,
+  signal,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -13,19 +15,25 @@ import {
 } from '@angular/forms';
 import { GlobalDataService } from '../../../../core/services/global-data.service';
 import { DrawerContentComponent } from '../../../../shared/UI/drawer-content/drawer-content.component';
+import { ICustomer } from '../../../../core/models/customer';
+import { LocationService } from '../../../../shared/services/location.service';
+import { RegionWiseCountries } from '../../../../core/models/locations';
+import { NgxSelectModule } from 'ngx-select-ex';
 
 @Component({
   selector: 'app-add-customer',
   standalone: true,
-  imports: [DrawerContentComponent, ReactiveFormsModule],
+  imports: [DrawerContentComponent, ReactiveFormsModule, NgxSelectModule],
   templateUrl: './add-customer.component.html',
   styleUrl: './add-customer.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddCustomerComponent {
+export class AddCustomerComponent implements OnInit {
   private fb = inject(NonNullableFormBuilder);
 
   private dataService = inject(GlobalDataService);
+
+  private locationService = inject(LocationService);
 
   protected form = this.fb.group({
     name: ['', [Validators.required]],
@@ -37,11 +45,39 @@ export class AddCustomerComponent {
         this.emailExistsValidator.bind(this),
       ],
     ],
-    region: ['', [Validators.required]],
-    country: ['', [Validators.required]],
+    region: ['ABC', [Validators.required]],
+    country: ['DEF', [Validators.required]],
   });
 
+  protected regions = signal<string[]>([]);
+
+  protected countries = signal<RegionWiseCountries>({});
+
   public onDrawerClose = output();
+
+  ngOnInit(): void {
+    this.getLocations();
+  }
+
+  private getLocations(): void {
+    this.locationService.getLocations().subscribe({
+      next: (response) => {
+        const regions: string[] = [];
+        const countries: RegionWiseCountries = {};
+
+        for (let key in response.data) {
+          const { region, country } = response.data[key];
+          if (!countries[region]) {
+            countries[region] = [];
+            regions.push(region);
+          }
+          countries[region].push(country);
+        }
+        this.regions.set(regions);
+        this.countries.set(countries);
+      },
+    });
+  }
 
   private emailExistsValidator(
     control: AbstractControl
@@ -60,9 +96,33 @@ export class AddCustomerComponent {
     if (this.form.invalid) {
       return this.form.markAllAsTouched();
     }
+    const request = this.getRequest();
+    this.dataService.addCustomer(request);
+    this.onDrawerClose.emit();
+  }
+
+  private getRequest(): ICustomer {
+    return {
+      name: this.name.value.trim(),
+      email: this.email.value.trim(),
+      region: this.region.value,
+      country: this.country.value,
+    };
   }
 
   protected get name() {
     return this.form.get('name') as AbstractControl;
+  }
+
+  protected get email() {
+    return this.form.get('email') as AbstractControl;
+  }
+
+  protected get region() {
+    return this.form.get('region') as AbstractControl;
+  }
+
+  protected get country() {
+    return this.form.get('country') as AbstractControl;
   }
 }

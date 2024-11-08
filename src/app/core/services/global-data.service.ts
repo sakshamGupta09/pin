@@ -41,7 +41,7 @@ export class GlobalDataService {
     }
   }
 
-  public postCustomerAdded(customer: ICustomer) {
+  public addCustomer(customer: ICustomer) {
     const customers = [...this.customers(), customer];
 
     this.customers.set(customers);

@@ -17,6 +17,29 @@
         </p>
         }
       </div>
+
+      <br>
+
+      <!-- Email -->
+      <div>
+        <label class="form__label required" for="email">Email</label>
+        <input type="email" placeholder="Email" id="email" formControlName="email" class="w-100 form__input">
+
+        <!-- Errors -->
+        @if (email.invalid && (email.touched || email.dirty)) {
+        <p class="form__error">
+          @if (email.hasError('required')) {
+          This field is required
+          }
+          @if (email.hasError('email')) {
+          Please enter a valid email
+          }
+          @if (email.hasError('emailExists')) {
+          Email already exists
+          }
+        </p>
+        }
+      </div>
     </form>
   </ng-container>
 
