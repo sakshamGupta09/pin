@@ -22,7 +22,10 @@
       <!-- Image -->
       <div>
         <label class="form__label required" for="image">Image</label>
-        <input type="file" accept="image/png, image/jpeg" placeholder=" Image" class="w-100 form__input">
+        <input type="file" ng2FileDrop ng2FileSelect [uploader]="uploader" accept="image/png, image/jpeg"
+          placeholder="Image" id="image" class="w-100 form__input">
+
+        <p class="mt-1">{{image.value}}</p>
 
         <!-- Errors -->
         @if (image.invalid && (image.touched || image.dirty)) {

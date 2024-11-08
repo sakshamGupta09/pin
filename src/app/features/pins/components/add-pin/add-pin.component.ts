@@ -15,12 +15,17 @@ import { DrawerContentComponent } from '../../../../shared/UI/drawer-content/dra
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { IPin } from '../../../../core/models/pin';
 import { PRIVACY_TYPES } from '../../../../constants/privacy-types';
-import { FileItem, FileUploader } from 'ng2-file-upload';
+import { FileItem, FileUploader, FileUploadModule } from 'ng2-file-upload';
 
 @Component({
   selector: 'app-add-pin',
   standalone: true,
-  imports: [DrawerContentComponent, ReactiveFormsModule, NgSelectComponent],
+  imports: [
+    DrawerContentComponent,
+    ReactiveFormsModule,
+    NgSelectComponent,
+    FileUploadModule,
+  ],
   templateUrl: './add-pin.component.html',
   styleUrl: './add-pin.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,15 +54,25 @@ export class AddPinComponent {
     autoUpload: false,
   });
 
+  protected imageDetails = {
+    name: '',
+    url: '',
+  };
+
   constructor() {
     this.uploader.onAfterAddingFile = this.afterFileAdded.bind(this);
   }
 
   private afterFileAdded(fileItem: FileItem): void {
     const file: File = fileItem._file;
+    this.image.setValue(file.name);
+
     const reader = new FileReader();
     reader.onload = (e: any) => {
-      console.log(e.target.result);
+      this.imageDetails = {
+        name: file.name,
+        url: e.target.result,
+      };
     };
     reader.readAsDataURL(file);
   }
@@ -74,7 +89,7 @@ export class AddPinComponent {
   private getRequest(): IPin {
     return {
       title: this.title.value.trim(),
-      image: this.image.value.trim(),
+      image: this.imageDetails.url,
       customers: this.customers.value,
       privacy: this.privacy.value,
     };
