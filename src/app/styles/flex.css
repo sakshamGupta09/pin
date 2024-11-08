@@ -27,7 +27,11 @@
 }
 
 .gap-2 {
-  gap: 1rem 1rem;
+  gap: 1rem;
+}
+
+.gap-1 {
+  gap: 0.5rem;
 }
 
 .w-100 {

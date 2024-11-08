@@ -37,7 +37,7 @@ export class GlobalDataService {
   private initPinsFromStorage() {
     const pinsData = localStorage.getItem(this.PINS_STORAGE_KEY);
     if (pinsData) {
-      this.customers.set(JSON.parse(pinsData));
+      this.pins.set(JSON.parse(pinsData));
     }
   }
 
@@ -48,7 +48,7 @@ export class GlobalDataService {
     localStorage.setItem(this.CUSTOMERS_STORAGE_KEY, JSON.stringify(customers));
   }
 
-  public postPinAdded(pin: IPin) {
+  public addPin(pin: IPin) {
     const pins = [...this.pins(), pin];
 
     this.pins.set(pins);

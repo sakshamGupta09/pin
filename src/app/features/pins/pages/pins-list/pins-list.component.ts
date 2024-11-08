@@ -29,10 +29,15 @@ export class PinsListComponent {
   protected showDrawer = signal(false);
 
   protected async addPinHandler() {
+    this.setDrawerVisibility(true);
+
     const { AddPinComponent } = await import(
       '../../components/add-pin/add-pin.component'
     );
-    this.drawerContent()?.createComponent(AddPinComponent);
+    const component = this.drawerContent()?.createComponent(AddPinComponent);
+    component?.instance.onDrawerClose.subscribe(() => {
+      this.closeDrawer();
+    });
   }
 
   protected async addCustomerClickHandler() {

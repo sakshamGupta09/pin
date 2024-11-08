@@ -1,1 +1,79 @@
-<p>add-pin works!</p>
+<app-drawer-content (onClose)="onDrawerClose.emit()">
+  <ng-container ngProjectAs="title">Add pin</ng-container>
+
+  <ng-container ngProjectAs="body">
+    <form [formGroup]="form" novalidate class="form">
+      <!-- Title -->
+      <div>
+        <label class="form__label required" for="title">Title</label>
+        <input type="text" placeholder="Title" id="title" formControlName="title" class="w-100 form__input" autofocus>
+
+        <!-- Errors -->
+        @if (title.invalid && (title.touched || title.dirty)) {
+        <p class="form__error">
+          @if (title.hasError('required')) {
+          This field is required
+          }
+        </p>
+        }
+      </div>
+
+      <br>
+      <!-- Image -->
+      <div>
+        <label class="form__label required" for="image">Image</label>
+        <input type="file" placeholder="Image" id="image" formControlName="image" class="w-100 form__input">
+
+        <!-- Errors -->
+        @if (image.invalid && (image.touched || image.dirty)) {
+        <p class="form__error">
+          @if (image.hasError('required')) {
+          This field is required
+          }
+        </p>
+        }
+      </div>
+
+      <br>
+      <!-- Customers -->
+      <div>
+        <label class="form__label required" for="Collaborators">Collaborators</label>
+        <ng-select [items]="customerList()" bindLabel="name" bindValue="name" placeholder="Select Collaborators"
+          [multiple]="true" formControlName="customers">
+        </ng-select>
+
+
+        <!-- Errors -->
+        @if (customers.invalid && (customers.touched || customers.dirty)) {
+        <p class="form__error">
+          @if (customers.hasError('required')) {
+          This field is required
+          }
+        </p>
+        }
+      </div>
+
+      <br>
+      <!-- Privacy -->
+      <div>
+        <label class="form__label required" for="privacy">Privacy</label>
+        <section class="flex gap-2">
+          @for (option of privacyTypes; track $index) {
+          <div class="flex gap-1">
+            <input type="radio" [id]="option" [value]="option" formControlName="privacy" />
+            <label [htmlFor]="option">{{option}}</label>
+          </div>
+          }
+        </section>
+      </div>
+    </form>
+  </ng-container>
+
+  <ng-container ngProjectAs="footer">
+    <div class="flex justify-between">
+      <button class="btn" (click)="onDrawerClose.emit()">Cancel</button>
+      <button class="btn" (click)="submitClickHandler()">Submit</button>
+    </div>
+  </ng-container>
+
+</app-drawer-content>
