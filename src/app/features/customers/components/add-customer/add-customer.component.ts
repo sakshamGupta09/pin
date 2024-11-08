@@ -18,12 +18,11 @@ import { DrawerContentComponent } from '../../../../shared/UI/drawer-content/dra
 import { ICustomer } from '../../../../core/models/customer';
 import { LocationService } from '../../../../shared/services/location.service';
 import { RegionWiseCountries } from '../../../../core/models/locations';
-import { NgxSelectModule } from 'ngx-select-ex';
 
 @Component({
   selector: 'app-add-customer',
   standalone: true,
-  imports: [DrawerContentComponent, ReactiveFormsModule, NgxSelectModule],
+  imports: [DrawerContentComponent, ReactiveFormsModule],
   templateUrl: './add-customer.component.html',
   styleUrl: './add-customer.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
