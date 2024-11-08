@@ -15,6 +15,7 @@ import { DrawerContentComponent } from '../../../../shared/UI/drawer-content/dra
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { IPin } from '../../../../core/models/pin';
 import { PRIVACY_TYPES } from '../../../../constants/privacy-types';
+import { FileItem, FileUploader } from 'ng2-file-upload';
 
 @Component({
   selector: 'app-add-pin',
@@ -41,6 +42,25 @@ export class AddPinComponent {
   public onDrawerClose = output();
 
   readonly privacyTypes = PRIVACY_TYPES;
+
+  protected uploader: FileUploader = new FileUploader({
+    url: '',
+    allowedFileType: ['image'],
+    autoUpload: false,
+  });
+
+  constructor() {
+    this.uploader.onAfterAddingFile = this.afterFileAdded.bind(this);
+  }
+
+  private afterFileAdded(fileItem: FileItem): void {
+    const file: File = fileItem._file;
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      console.log(e.target.result);
+    };
+    reader.readAsDataURL(file);
+  }
 
   protected submitClickHandler(): void {
     if (this.form.invalid) {

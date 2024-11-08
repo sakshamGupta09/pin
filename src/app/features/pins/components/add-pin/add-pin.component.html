@@ -22,7 +22,7 @@
       <!-- Image -->
       <div>
         <label class="form__label required" for="image">Image</label>
-        <input type="file" placeholder="Image" id="image" formControlName="image" class="w-100 form__input">
+        <input type="file" accept="image/png, image/jpeg" placeholder=" Image" class="w-100 form__input">
 
         <!-- Errors -->
         @if (image.invalid && (image.touched || image.dirty)) {
