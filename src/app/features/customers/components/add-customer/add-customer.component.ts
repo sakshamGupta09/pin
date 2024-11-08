@@ -82,6 +82,10 @@ export class AddCustomerComponent implements OnInit {
   private emailExistsValidator(
     control: AbstractControl
   ): ValidationErrors | null {
+    if (!control.value) {
+      return null;
+    }
+
     const customers = this.dataService.getCustomers()();
 
     for (let i = 0; i < customers.length; i++) {

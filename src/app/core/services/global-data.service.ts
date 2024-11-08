@@ -52,6 +52,6 @@ export class GlobalDataService {
     const pins = [...this.pins(), pin];
 
     this.pins.set(pins);
-    localStorage.setItem(this.CUSTOMERS_STORAGE_KEY, JSON.stringify(pins));
+    localStorage.setItem(this.PINS_STORAGE_KEY, JSON.stringify(pins));
   }
 }
