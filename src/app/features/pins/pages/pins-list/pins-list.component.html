@@ -19,7 +19,11 @@
       @for (pin of pins(); track pin) {
       <tr>
         <td>{{pin.title}}</td>
-        <td>{{pin.image}}</td>
+        <td>
+          <div class="image-container">
+            <img [src]="pin.image" class="image" [alt]="pin.title">
+          </div>
+        </td>
         <td>{{pin.customers}}</td>
         <td>{{pin.privacy}}</td>
       </tr>
